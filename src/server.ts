@@ -1,17 +1,15 @@
-import fastify, { FastifyInstance } from "fastify";
+import Fastify from "fastify";
+import { contactsRoutes } from "./routes/contact.routes";
 import { userRoutes } from "./routes/user.routes";
-
-const app: FastifyInstance = fastify({ logger: true });
+const app = Fastify();
 
 app.register(userRoutes, {
   prefix: "/users",
 });
+app.register(contactsRoutes, {
+  prefix: "/contacts",
+});
 
-app.listen(
-  {
-    port: 3333,
-  },
-  () => {
-    console.log("http://localhost:3333");
-  }
-);
+app.listen({ port: 3333 }, () => {
+  console.log("http://localhost:3333");
+});
